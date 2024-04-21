@@ -12,5 +12,5 @@ class BuildCount(val key: String)
 
     fun read(): Int = File("$key-count.txt").takeIf(File::exists)?.let { it.readText().trim().toIntOrNull()?:init() }?:init()
 
-    fun inc() = File("$key-count.txt").takeIf(File::exists)?.let { write(it.readText().trim().toIntOrNull()?.inc()?:1) }?:init()
+    fun inc() = File("$key-count.txt").takeIf(File::exists)?.let { write(it.readText().trim().toIntOrNull()?.inc()?:1) }?:write(1)
 }
