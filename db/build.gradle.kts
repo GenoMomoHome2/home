@@ -1,10 +1,17 @@
 import com.geno1024.home.buildsrc.BuildCount
+import com.geno1024.home.buildsrc.Dependencies
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm")
 }
 
+dependencies {
+    implementation("org.jetbrains.exposed", "exposed-core", Dependencies.exposedVersion)
+    implementation("org.jetbrains.exposed", "exposed-jdbc", Dependencies.exposedVersion)
+}
+
+// <editor-fold desc="Build Counter">
 val runCount = BuildCount("run")
 val jarCount = BuildCount("jar")
 
@@ -21,6 +28,7 @@ tasks.register("jarCount") {
         jarCount.inc()
     }
 }
+// </editor-fold>
 
 tasks.withType<KotlinCompile> {
     dependsOn(tasks.getByName("runCount"))
