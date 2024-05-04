@@ -3,7 +3,7 @@ package com.geno1024.home.db
 import org.jetbrains.exposed.sql.Column
 import org.jetbrains.exposed.sql.Table
 
-class Member : Table()
+object Member : Table()
 {
     val id: Column<Int> = integer("id").autoIncrement()
     val role: Column<String> = varchar("role", 40)

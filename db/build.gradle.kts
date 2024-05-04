@@ -11,6 +11,7 @@ dependencies {
     implementation(project(":configs"))
     implementation("org.jetbrains.exposed", "exposed-core", Dependencies.exposedVersion)
     implementation("org.jetbrains.exposed", "exposed-jdbc", Dependencies.exposedVersion)
+    implementation("org.jetbrains.exposed", "exposed-java-time", Dependencies.exposedVersion)
     implementation("org.mariadb.jdbc", "mariadb-java-client", "3.3.1")
 }
 

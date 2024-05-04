@@ -20,7 +20,8 @@ object DB
         transaction {
             addLogger(StdOutSqlLogger)
             listOf(
-                Member()
+                Member,
+                Anniversary
             ).forEach {
                 SchemaUtils.drop(it)
                 SchemaUtils.create(it)
