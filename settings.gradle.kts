@@ -6,5 +6,6 @@ dependencyResolutionManagement {
     }
 }
 
+include(":configs")
 include(":docs")
 include(":db")
