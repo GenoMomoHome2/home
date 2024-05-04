@@ -2,6 +2,7 @@ package com.geno1024.home.db
 
 import com.geno1024.home.Configs
 import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.StdOutSqlLogger
 import org.jetbrains.exposed.sql.addLogger
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -18,6 +19,12 @@ object DB
             password = Configs.Db.password)
         transaction {
             addLogger(StdOutSqlLogger)
+            listOf(
+                Member()
+            ).forEach {
+                SchemaUtils.drop(it)
+                SchemaUtils.create(it)
+            }
         }
     }
 }
