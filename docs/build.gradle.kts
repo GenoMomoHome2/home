@@ -1,4 +1,5 @@
 import com.geno1024.home.buildsrc.BuildCount
+import com.geno1024.home.buildsrc.Configs
 import com.geno1024.home.buildsrc.ScpCommand
 import com.geno1024.home.buildsrc.Unzip
 
@@ -29,6 +30,13 @@ tasks.register("publish") {
     group = "publish"
     doLast {
         Unzip.unzip(rootProject.file("webHelpDOCS2-all.zip"), rootProject.file("webHelpDOCS2-all"))
+        ScpCommand.copy(
+            fromFile = rootProject.file("webHelpDOCS2-all").absolutePath,
+            toHost = Configs.Docs.host,
+            toPort = Configs.Docs.port.toIntOrNull()?:22,
+            toUser = Configs.Docs.user,
+            toFile = Configs.Docs.target
+        )
     }
 }
 // </editor-fold>
