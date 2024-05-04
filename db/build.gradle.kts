@@ -4,11 +4,14 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm")
+    application
 }
 
 dependencies {
+    implementation(project(":configs"))
     implementation("org.jetbrains.exposed", "exposed-core", Dependencies.exposedVersion)
     implementation("org.jetbrains.exposed", "exposed-jdbc", Dependencies.exposedVersion)
+    implementation("org.mariadb.jdbc", "mariadb-java-client", "3.3.1")
 }
 
 // <editor-fold desc="Build Counter">
@@ -36,4 +39,8 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Jar> {
     dependsOn(tasks.getByName("jarCount"))
+}
+
+application {
+    mainClass = "com.geno1024.home.db.DB"
 }
