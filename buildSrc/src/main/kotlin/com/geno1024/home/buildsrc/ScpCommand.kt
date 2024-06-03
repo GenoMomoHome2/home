@@ -4,10 +4,8 @@ object ScpCommand
 {
     fun copy(fromFile: String, toHost: String, toPort: Int = 22, toUser: String, toFile: String)
     {
-        val r = Runtime.getRuntime()
-        val p = r.exec(arrayOf("scp", "-r", "-oPubkeyAcceptedKeyTypes=+ssh-rsa", "-P", "$toPort", fromFile, "$toUser@$toHost:$toFile"))
-        p.inputReader().forEachLine(::println)
-        p.errorReader().forEachLine(System.err::println)
-        p.waitFor()
+        if (toFile.isEmpty()) return
+        RunCommand.run(arrayOf("ssh", "-oPubkeyAcceptedKeyTypes=+ssh-rsa", "$toUser@$toHost", "rm -r $toFile/*"))
+        RunCommand.run(arrayOf("scp", "-r", "-oPubkeyAcceptedKeyTypes=+ssh-rsa", "-P", "$toPort", fromFile, "$toUser@$toHost:$toFile"))
     }
 }
