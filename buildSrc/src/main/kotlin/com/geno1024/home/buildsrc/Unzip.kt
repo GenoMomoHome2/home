@@ -6,9 +6,14 @@ import java.util.zip.ZipFile
 
 object Unzip
 {
-    fun unzip(zipFile: File, target: File, verbose: Boolean = false) = with(ZipFile(zipFile)) {
+    fun unzip(zipFile: File, target: File, verbose: Boolean = false, overrideIfExists: Boolean = true) = with(ZipFile(zipFile)) {
         if (!target.exists())
         {
+            target.mkdirs()
+        }
+        else if (overrideIfExists)
+        {
+            target.deleteRecursively()
             target.mkdirs()
         }
         entries().iterator().forEachRemaining { entry ->
