@@ -12,6 +12,7 @@ object DB
     @JvmStatic
     fun main(args: Array<String>)
     {
+        println(System.getProperty("home-db-username"))
         Database.connect(
             url = "jdbc:mariadb://${Configs.Db.host}:${Configs.Db.port}/${Configs.Db.database}",
             driver = "org.mariadb.jdbc.Driver",
